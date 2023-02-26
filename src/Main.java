@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
 
-        System.out.println("Namn lista: " + "De sju dvärgarna" + "");
+
         // }
         Scanner input = new Scanner(System.in);
 
@@ -18,93 +18,109 @@ public class Main {
         list.add("Trötter");
         list.add("Kloker");
         list.add("Prosit");
-        // LOOP:
 
-        //initiera en False boolean för input of choice.
+        int antalNamn = list.size();
 
 
-        // Gör en loop för att print ut en fin lista! Den kommer att återanvändas under kodens gång!
+        // Meny
+        System.out.println("Namn lista: " + "De " + antalNamn + " dvärgarna" + "");
         for (int i = 0; i < list.size(); i++) {
+
             System.out.print("|-----------");
             System.out.print(list.get(i));
             System.out.print("-----------|\n");
         }
-        // Fråga om alternativ med CRUD! create, replace, update or delete.
-        System.out.println("Redigera namnlistan? Y / N\n");
-        input = new Scanner(System.in);
-        // Skapa en string som kollar för värdet y / n, else.
-        String inputSvar = input.nextLine();
-        // Skapa en loop med olika alternativ för svar.
+        System.out.println("1. Lägg till ett namn i listan");
+        System.out.println("2. Ändra ett befintligt namn i listan");
+        System.out.println("4 Radera ett namn i listan");
+        System.out.println("5. Visa namnen i listan");
+        System.out.println("6. Avsluta program.");
+        // Meny avslut
 
-        if (inputSvar.equalsIgnoreCase("y")) {
-            System.out.println("1. Lägg till ett namn i listan");
-            System.out.println("2. Ändra ett befintligt namn i listan");
-            System.out.println("4 Radera ett namn i listan");
-            System.out.println("5. Visa namnen i listan");
-            input = new Scanner(System.in);
+        // Börja loop!
+        boolean finished = false; // Initiera en boolean som håller koll på om användaren vill avlsuta loopen.
+
+        while (!finished) {
+
+
             int choice = input.nextInt();
             switch (choice) {
-                // Lägga till ett namn i listan (CREATE)
+
+
+                // Lägg till ett namn i listan (CREATE)
                 case 1:
                     System.out.println("du valde att lägga till ett namn i listan\n Skriv in namnet du vill lägga till: ");
                     input = new Scanner(System.in);
                     String nameAdded = input.nextLine();
                     list.add(nameAdded);
+
+                    // Visa meny:
+                    System.out.println("Namn lista: " + "De " + antalNamn + " dvärgarna" + "");
                     for (int i = 0; i < list.size(); i++) {
+
                         System.out.print("|-----------");
                         System.out.print(list.get(i));
                         System.out.print("-----------|\n");
                     }
+                    System.out.println("1. Lägg till ett namn i listan");
+                    System.out.println("2. Ändra ett befintligt namn i listan");
+                    System.out.println("4 Radera ett namn i listan");
+                    System.out.println("5. Visa namnen i listan");
+                    System.out.println("6. Avsluta program.");
+
                     break;
-                // Ändra ett befintligt namn i listan (REPLACE)
+
+                // Ändra ett befintligt namn i listan (UPDATE)
                 case 2:
-
-                    System.out.println("du valde att ändra ett befintligt namn i listan\n\n Skriv in namnet du vill ändra: \n");
+                    System.out.println("du valde att ändra ett befintligt namn i listan\n Skriv in namnet du vill ändra: ");
                     input = new Scanner(System.in);
+                    String nameUpdated = input.nextLine();
+                    boolean foundName = false; // kontrollera om namnet finns med i listan.
                     for (int i = 0; i < list.size(); i++) {
+                        if (list.get(i).equals(nameUpdated)) { // Kontrolla om ett namn matchar.
+                            foundName = true;
+                            System.out.println("Vad vill du ändra namnet: " + list.get(i) + " till?");
+                            String newName = input.nextLine();
+                            list.add(newName);
+                            System.out.println("" + newName + " har lagts till i listan!");
+                            System.out.println("Namn lista: " + "De " + antalNamn + " dvärgarna" + "");
+                        }
+                    }
+
+                    // Visa meny igen för loopen.
+                    for (int i = 0; i < list.size(); i++) {
+
                         System.out.print("|-----------");
                         System.out.print(list.get(i));
                         System.out.print("-----------|\n");
                     }
-                    String nameWantToChange = input.nextLine();
-                    // Case sensitive!
-                    System.out.println("Skriv in vad du vill ändra namnet till: ");
-                    input = new Scanner(System.in);
-                    String nameChangedTo = input.nextLine();
-                    list.add(nameChangedTo);
-                    list.remove(nameWantToChange);
-                    break;
-                case 3:
-                    System.out.println("du valde att radera ett namn i listan\n\n Skriv in namnet du vill radera: \n");
-                    input = new Scanner(System.in);
-                    for (int i = 0; i < list.size(); i++) {
-                        System.out.print("|-----------");
-                        System.out.print(list.get(i));
-                        System.out.print("-----------|\n");
-                    }
-                    String nameWantToDelete = input.nextLine();
-                    list.remove(nameWantToDelete);
+                    System.out.println("1. Lägg till ett namn i listan");
+                    System.out.println("2. Ändra ett befintligt namn i listan");
+                    System.out.println("4 Radera ett namn i listan");
+                    System.out.println("5. Visa namnen i listan");
+                    System.out.println("6. Avsluta program.");
                     break;
 
+
+                    // Radera ett namn i listan (DELETE)
                 case 4:
-                    int i == list.size();
+                    System.out.println("du valde att radera ett namn i listan\n Skriv in namnet du vill radera: ");
+                    input = new Scanner(System.in);
+                    String nameDeleted = input.nextLine();
 
-                    while (i >= 1) {
-                        System.out.print("|-----------");
-                        System.out.print(list.get(i));
-                        System.out.print("-----------|\n");
-                        i--;
-                    } else {
-                        System.out.println("Du har ingen namn i listan");
-
-                }
-
-                    break;
             }
-
         }
-
     }
-
 }
+
+
+
+
+
+
+
+
+
+
+
 
